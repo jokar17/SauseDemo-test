@@ -25,7 +25,7 @@ def driver(request):
         options.add_argument("--disable-dev-shm-usage")
         d = webdriver.Chrome(options=options)
     elif browser == "firefox":
-       options = webdriver.FirefoxOptions()
+        options = webdriver.FirefoxOptions()
         options.add_argument("--headless")
         d = webdriver.Firefox(options=options)
     else:
@@ -35,7 +35,7 @@ def driver(request):
     d.implicitly_wait(5)
     yield d
     d.quit()
-    
+
 @pytest.fixture()
 def logged_driver(driver):
     page = LoginPage(driver)
