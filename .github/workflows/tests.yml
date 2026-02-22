@@ -23,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run tests
-        run: pytest --browser=chrome
+        run: python -m pytest --browser=chrome
 
       - name: Upload report
         if: always()
