@@ -19,9 +19,15 @@ def driver(request):
     browser = request.config.getoption("--browser")
 
     if browser == "chrome":
-        d = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        d = webdriver.Chrome(options=options)
     elif browser == "firefox":
-        d = webdriver.Firefox()
+       options = webdriver.FirefoxOptions()
+        options.add_argument("--headless")
+        d = webdriver.Firefox(options=options)
     else:
         raise ValueError(f"Browser non supportato: {browser}")
 
@@ -29,6 +35,7 @@ def driver(request):
     d.implicitly_wait(5)
     yield d
     d.quit()
+    
 @pytest.fixture()
 def logged_driver(driver):
     page = LoginPage(driver)
