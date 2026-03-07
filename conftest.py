@@ -5,6 +5,9 @@ from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 import pytest
 import os
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -49,6 +52,7 @@ def logged_driver(driver):
 def checkout_driver(logged_driver):
     page = InventoryPage(logged_driver)
     page.prep_to_checkout()
+    WebDriverWait(logged_driver, 10).until(EC.url_contains("/cart")    )
 
     yield logged_driver
 
