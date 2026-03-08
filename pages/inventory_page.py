@@ -26,15 +26,6 @@ class InventoryPage:
 
     def get_titles_list(self):
         titles = self.wait.until(EC.presence_of_all_elements_located(self.ITEM_TITLE))
-       # titles  = self.driver.find_elements(*self.ITEM_TITLE)
-        list_titles = []
-        '''
-        for title in titles:
-            list_titles.append(title.text)
-
-        return list_titles
-        '''
-
         return [title.text for title in titles]
 
     def add_to_cart(self):
