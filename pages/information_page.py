@@ -8,7 +8,7 @@ class InformationPage:
     FIRST_NAME_INPUT = (By.ID, "first-name")
     LAST_NAME_INPUT = (By.ID, "last-name")
     ZIP_INPUT = (By.ID, "postal-code")
-    CANCEL_BTN =(By.CLASS_NAME, "cart_cancel_link")
+    CANCEL_BTN = (By.XPATH, "//button[@data-test='cancel']")
     CONTINUE_BTN = (By.ID, "continue")
     ERROR_MSG = (By.XPATH, "//h3[@data-test='error']")
 

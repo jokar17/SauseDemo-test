@@ -26,15 +26,16 @@ def driver(request):
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--window-size=1920,1080")
         d = webdriver.Chrome(options=options)
     elif browser == "firefox":
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless")
+        options.add_argument("--window-size=1920,1080")
         d = webdriver.Firefox(options=options)
     else:
         raise ValueError(f"Browser non supportato: {browser}")
 
-    options.add_argument("--window-size=1920,1080")
     yield d
     d.quit()
 
