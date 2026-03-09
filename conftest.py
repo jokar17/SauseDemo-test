@@ -34,7 +34,7 @@ def driver(request):
     else:
         raise ValueError(f"Browser non supportato: {browser}")
 
-    d.maximize_window()
+    options.add_argument("--window-size=1920,1080")
     yield d
     d.quit()
 
@@ -44,6 +44,9 @@ def logged_driver(driver):
     page.open()
     page.login("standard_user", "secret_sauce")
 
+    WebDriverWait(driver, 10).until(
+        EC.url_contains("inventory")
+    )
     yield driver
 
 
@@ -53,6 +56,10 @@ def checkout_driver(logged_driver):
     page = InventoryPage(logged_driver)
     page.prep_to_checkout()
 
+    WebDriverWait(logged_driver, 10).until(
+        EC.url_contains("cart")
+    )
+
     yield logged_driver
 
 
@@ -60,6 +67,10 @@ def checkout_driver(logged_driver):
 def information_driver(checkout_driver):
     page = CartPage(checkout_driver)
     page.click_checkout()
+
+    WebDriverWait(checkout_driver, 10).until(
+        EC.url_contains("checkout-step-one")
+    )
 
     yield checkout_driver
 
