@@ -49,7 +49,7 @@ class InventoryPage:
         self.wait.until(EC.element_to_be_clickable(self.CART_ICON)).click()
         '''
         for _ in range(3):
-            self.wait.until(EC.element_to_be_clickable(self.ADD_TO_CART_BTN)).click()
-        self.wait.until(EC.element_to_be_clickable(self.CART_ICON)).click()
+            self.wait.until(EC.presence_of_element_located(self.ADD_TO_CART_BTN)).click()
+        self.wait.until(EC.presence_of_element_located(self.CART_ICON)).click()
 
 
