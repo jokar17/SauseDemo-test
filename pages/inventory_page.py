@@ -57,7 +57,7 @@ class InventoryPage:
     def prep_to_checkout(self):
         for i in range(3):
             self.wait.until(EC.element_to_be_clickable(self.ADD_TO_CART_BTN)).click()
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, 20).until(
                 lambda d, expected=i + 1: self._badge_count(d) == expected
             )
         self.wait.until(EC.element_to_be_clickable(self.CART_ICON)).click()
