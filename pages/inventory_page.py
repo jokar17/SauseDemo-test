@@ -57,6 +57,14 @@ class InventoryPage:
     def prep_to_checkout(self):
         for _ in range(3):
             self.wait.until(EC.element_to_be_clickable(self.ADD_TO_CART_BTN)).click()
-        self.wait.until(lambda d: d.find_element(*self.CART_BADGE).text == "3")
+        WebDriverWait(self.driver, 20).until(
+            lambda d: self._badge_count(d) == 3
+        )
         self.wait.until(EC.element_to_be_clickable(self.CART_ICON)).click()
+
+    def _badge_count(self, d):
+        try:
+            return int(d.find_element(*self.CART_BADGE).text)
+        except:
+            return 0
 
